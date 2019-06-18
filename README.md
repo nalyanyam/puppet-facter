@@ -1,5 +1,6 @@
 #####
 some quick hack to manage custom facts from the server
+
 Inspiration from other facter modules from github
 
 The hashes can be defined in a common hiera level
