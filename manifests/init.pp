@@ -1,12 +1,9 @@
-# == Class: facter
-# Manage custom facts from hiera
 class facter (
   $classifier                     = undef,
   String $facts_d_dir             = 'USE_DEFAULTS',
-  #Hash $facts_hash                = {},
+  Hash $facts_hash                = {},
   String $facts_file              = 'facts.yaml',
   Boolean $purge_facts_d          = false,
-  Boolean $facts_hash_hiera_merge = true,
 ) {
   
   case $::kernel {
@@ -62,47 +59,34 @@ class facter (
    $hostlist_array = lookup(facter::classifier, Hash).map |String $key, Hash $value| {
       $hostlist =  $value['hostlist']
    }
-   $facts_hash = lookup(facter::classifier, Hash).map |String $key, Hash $value| {
-      $facts_hash =  $value['facts_hash']
-   }
+   $filtered_array = lookup(facter::classifier, Hash).map |String $uniq_key, Hash $value| {
+     case $hostname {
+       *$value['hostlist']: {
+         $value['facts_hash'].map |String $key, Hash $newfacts_hash| {
+           #flatten($newfacts_hash['value'])
+           #$newfacts_hash['value']
+           #$key
+           facter::classifier { "$uniq_key -  $newfacts_hash":
+             key => $key,
+             fact_value => $newfacts_hash['value'],
+             facts_file => $facts_file,
+             facts_d_dir => $facts_d_dir_real,
+             facts_hash  => $facts_hash,
+             hostlist    => $value['hostlist'],
+           }
 
-   $facts_hash_array = $facts_hash.each |Integer $index, Hash $value| {
-       $facts_hash =  $value['facts_hash']
+         }
+       }
+       default: {
+         #false
+       }
+     }
+     # End for case statement
    }
+   # End for $filtered_array
 
    # Only for debugging
-   #notify{"facts_hash_array : $facts_hash_array": }
-
-
-   #$facts_hash.each |Integer $index, Hash $facts_hash| {
-         
-
-    
-    $hostlist_array.each |Integer $index, Array $hostlist_array| {
-
-       #create_resources("facter::classifier",$facts_hash, $facts_defaults)
-       facter::classifier { "$hostlist_array -  $facts_hash - $index":
-         #fact_value => $fact_value,
-         fact      => $fact,
-         value     => $value,
-         #fact_name => $fact_name,
-         facts_file => $facts_file,
-         facts_d_dir => $facts_d_dir_real,
-         facts_hash  => $facts_hash_array[$index],
-         hostlist       => $hostlist_array,
-         #hostlist       => $hostlist_array[$index],
-         hostlist_array => $hostlist_array,
-         #$facts_defaults => $facts_defaults,
-
-       }
-
-      #}
-      # Ends $host_fact
-    
-   # Above was for $facts_hash.each  statement
-   } # Ends hostlist_array
-
-
+   #notify {"Filtered_array: $filtered_array": }
 
 
 }

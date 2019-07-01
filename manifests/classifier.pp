@@ -5,12 +5,9 @@
 define facter::classifier (
   $hostlist    = "$facter::hostlist",
   $hostlist_array     = "$facter::hostlist_array",
-  $case_hostlist_array     = "$facter::case_hostlist_array",
-  $facts_hash  = "$facter::facts_hash",
-  #$fact_value,
-  $value,
-  $fact       = $name,
-  #$fact_name,
+  $fact_value = "$facter::fact_value",
+  $key  = "$facter::key",
+  $facts_hash = "$facter::facts_hash",
   $facts_file  = "$facter::facts_file",
   $facts_d_dir = "$facter::facts_d_dir_real",
 
@@ -23,12 +20,11 @@ define facter::classifier (
 
   #$match = "^${key}:"
   ##########################
-  $facts_hash.each |$key, $value| {
 
-  #$fact_val = $facts_hash['value']
-  $fact_val = $value['value']
 
-  case $hostname {
+  #case $hostname {
+
+  case $trusted['hostname'] {
     # using splat function
     *$hostlist: {
                    $host_fact = true
@@ -40,9 +36,9 @@ define facter::classifier (
 
 
   if $host_fact == true {
-  file_line { "fact_line_${name}-${key}-$fact_val":
+  file_line { "fact_line_${name}-${key}-$fact_value":
     path  => "${facts_d_dir}/${facts_file}",
-    line  => "${key}: $fact_val",
+    line  => "${key}: $fact_value",
     match => "^${key}:",
     #match => "$match",
   }
@@ -50,6 +46,8 @@ define facter::classifier (
   }
   # Closes the if $host_fact
 
-  }
-  # Closes the facts_hash.each
+  #notify {"Facter values from classifier: $fact_value": }
+  #notify {"hostlist from classifier-$fact_value: $hostlist": }
+
+  #}
 }
