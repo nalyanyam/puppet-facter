@@ -1,5 +1,5 @@
 class facter (
-  $classifier                     = undef,
+  Optional[Hash] $classifier      = undef,
   String $facts_d_dir             = 'USE_DEFAULTS',
   Hash $facts_hash                = {},
   String $facts_file              = 'facts.yaml',
