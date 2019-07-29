@@ -4,7 +4,7 @@
 #
 define facter::classifier (
   $hostlist    = "$facter::hostlist",
-  $hostlist_array     = "$facter::hostlist_array",
+  #$hostlist_array     = "$facter::hostlist_array",
   $fact_value = "$facter::fact_value",
   $key  = "$facter::key",
   $facts_hash = "$facter::facts_hash",

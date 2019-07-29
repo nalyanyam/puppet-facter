@@ -4,6 +4,7 @@ class facter (
   Hash $facts_hash                = {},
   String $facts_file              = 'facts.yaml',
   Boolean $purge_facts_d          = false,
+  Boolean $facts_hash_hiera_merge = false,
 ) {
   
   case $::kernel {
@@ -54,12 +55,18 @@ class facter (
       'facts_dir' => $facts_d_dir,
     }
 
+  # Merge facts_hash in hiera
+  if $facts_hash_hiera_merge == true {
+    $hash_merge_strategy = hash
+  } else {
+    $hash_merge_strategy = first
+  }
 
 
-   $hostlist_array = lookup(facter::classifier, Hash).map |String $key, Hash $value| {
+   $hostlist_array = lookup(facter::classifier, {merge => "$hash_merge_strategy"}).map |String $key, Hash $value| {
       $hostlist =  $value['hostlist']
    }
-   $filtered_array = lookup(facter::classifier, Hash).map |String $uniq_key, Hash $value| {
+   $filtered_array = lookup(facter::classifier, {merge => "$hash_merge_strategy"}).map |String $uniq_key, Hash $value| {
      case $hostname {
        *$value['hostlist']: {
          $value['facts_hash'].map |String $key, Hash $newfacts_hash| {
