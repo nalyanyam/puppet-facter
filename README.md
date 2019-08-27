@@ -18,7 +18,7 @@ Without hash definitions, module would only create facts.yaml fact file
 
 facts_hash_hiera_merge
 ----------------------
-Boolean value to control merging of all found instances of facter::classifier in Hiera. When set to true, all facts hashes defined at different hiera levels will beincluded in the catalog.
+Boolean value to control merging of all found instances of facter::classifier in Hiera. When set to true, all facts hashes defined at different hiera levels will be included in the catalog.
 
 - *Default*: false
 

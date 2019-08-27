@@ -1,0 +1,32 @@
+{
+  "name": "nalyanyam-facter",
+  "version": "0.0.1",
+  "author": "nalyanyam",
+  "summary": "Manage client custom facts",
+  "description": "Manages facts.",
+  "license": "Apache-2.0",
+  "source": "git://github.com/nalyanyam/puppet-facter.git",
+  "project_page": "https://github.com/nalyanyam/puppet-facter",
+  "issues_url": "https://github.com/nalyanyam/puppet-facter/issues",
+  "description": "Manages facts.",
+  "requirements": [
+    {"name":"puppet","version_requirement":">= 3.0.0 < 7.0.0"}
+  ],
+  "dependencies": [
+    {"name":"puppetlabs/stdlib","version_requirement":">= 4.6.0 < 6.0.0"}
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat"
+    },
+    {
+      "operatingsystem": "CentOS"
+    },
+    {
+      "operatingsystem": "windows"
+    },
+    {
+      "operatingsystem": "Ubuntu"
+    }
+  ]
+}
