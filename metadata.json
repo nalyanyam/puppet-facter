@@ -3,17 +3,15 @@
   "version": "0.0.1",
   "author": "nalyanyam",
   "summary": "Manage client custom facts",
-  "description": "Manages facts.",
   "license": "Apache-2.0",
   "source": "git://github.com/nalyanyam/puppet-facter.git",
   "project_page": "https://github.com/nalyanyam/puppet-facter",
   "issues_url": "https://github.com/nalyanyam/puppet-facter/issues",
-  "description": "Manages facts.",
-  "requirements": [
-    {"name":"puppet","version_requirement":">= 3.0.0 < 7.0.0"}
-  ],
   "dependencies": [
-    {"name":"puppetlabs/stdlib","version_requirement":">= 4.6.0 < 6.0.0"}
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.6.0 < 6.0.0"
+    }
   ],
   "operatingsystem_support": [
     {
@@ -28,5 +26,15 @@
     {
       "operatingsystem": "Ubuntu"
     }
-  ]
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 3.0.0 < 7.0.0"
+    }
+  ],
+  "description": "Manages facts.",
+  "pdk-version": "1.13.0",
+  "template-url": "file:///data/opt/puppetlabs/pdk/share/cache/pdk-templates.git#1.13.0",
+  "template-ref": "1.13.0-0-g66e1443"
 }

@@ -1,0 +1,16 @@
+---
+
+facter::classifier:
+  'newgroup':
+    hostlist:
+      - test1
+      - test2
+      - test3
+    facts_hash:
+        role:
+          value: Testserver
+        groups:
+          value: group1,profile_group
+        profile:
+          value: anothertestserver
+

@@ -1,5 +1,8 @@
 class facter (
   Optional[Hash] $classifier      = undef,
+  Array $hostlist                 = [ test1, test2 ],
+  String $fact_value              = 'testserver',
+  String $key                     = 'key1',
   String $facts_d_dir             = 'USE_DEFAULTS',
   Hash $facts_hash                = {},
   String $facts_file              = 'facts.yaml',
