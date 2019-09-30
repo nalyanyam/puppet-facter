@@ -5,18 +5,20 @@ describe 'facter' do
     context "on #{os}" do
       let(:facts) { os_facts }
       let(:hiera_config) { 'spec/fixtures/hiera/hiera.yaml' }
-      it { is_expected.to compile }
+      it { is_expected.to compile.with_all_deps }
     end
   end
 
 
   #context 'with default options' do
   context 'with kernel Linux options' do
-    let(:facts) { { :kernel => 'Linux' } }
+    let(:facts) { { :kernel => 'Linux', :hostname => 'test1' } }
 
     let(:params) do
         { :name => 'name', 
           :purge_facts_d => false,
+          :facts_d_dir   => '/factsdir',
+          :facts_file    => 'customs.yaml',
 
         }
     end
@@ -26,14 +28,14 @@ describe 'facter' do
 
     it { should contain_file('facts_file_name').with({
         'ensure'  => 'file',
-        'path'    => '/etc/puppetlabs/facter/facts.d/facts.yaml',
+        'path'    => '/factsdir/customs.yaml',
       })
     }
 
     it {
       should contain_file('facts_d_directory').with({
         'ensure'  => 'directory',
-        'path'    => '/etc/puppetlabs/facter/facts.d',
+        'path'    => '/factsdir',
         'purge'   => false,
       })
     }
@@ -41,7 +43,7 @@ describe 'facter' do
   end
 
   context 'with kernel windows options' do
-    let(:facts) { { :kernel => 'windows' } }
+    let(:facts) { { :kernel => 'windows', :hostname => 'test1' } }
 
     let(:params) do
         { :name => 'name', 

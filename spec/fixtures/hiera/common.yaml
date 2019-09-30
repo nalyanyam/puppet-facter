@@ -8,9 +8,8 @@ facter::classifier:
       - test3
     facts_hash:
         role:
-          value: Testserver
+          value: fact1value
         groups:
           value: group1,profile_group
         profile:
           value: anothertestserver
-
