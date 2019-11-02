@@ -8,12 +8,12 @@ define facter::classifier (
   $fact_value = "$facter::fact_value",
   $key  = "$facter::key",
   $facts_hash = "$facter::facts_hash",
-  $facts_file  = "$facter::facts_file",
+  $facts_file  = "$facter::facts_file"
   $facts_d_dir = "$facter::facts_d_dir_real",
 
 ) {
 
-  include ::facter
+  include ::facter 
 
 
   
