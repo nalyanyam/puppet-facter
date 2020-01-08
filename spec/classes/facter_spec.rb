@@ -30,7 +30,8 @@ describe 'facter' do
 
     it { should contain_class('facter') }
 
-    it { should contain_file('facts_file_name').with({
+    it {
+      should contain_file('facts_file_name').with({
         'ensure'  => 'file',
         'path'    => '/factsdir/customs.yaml',
       })
@@ -43,7 +44,6 @@ describe 'facter' do
         'purge'   => false,
       })
     }
-
   end
 
   context 'with kernel windows options' do
@@ -63,8 +63,8 @@ describe 'facter' do
 
     it { should contain_class('facter') }
 
-
-    it { should contain_file('facts_file_name').with({
+    it {
+      should contain_file('facts_file_name').with({
         'ensure'  => 'file',
         'path'    => 'C:\ProgramData\PuppetLabs\facter\facts.d/facts.yaml',
       })
@@ -77,6 +77,5 @@ describe 'facter' do
         'purge'   => false,
       })
     }
-
   end
 end

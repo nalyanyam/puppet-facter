@@ -6,14 +6,14 @@ describe 'facter::classifier' do
         'include facter'
   end
 
-  #let(:params) do
+  # let(:params) do
   #  {}
-  #end
+  # end
 
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let(:facts) { os_facts }
-    
+
       # Contain class facter
       it { is_expected.to contain_class('facter') }
 
@@ -32,15 +32,15 @@ describe 'facter::classifier' do
       }
     end
 
-    it {  
+    it {
       should contain_file_line('fact_line_newgroup -  {value => fact1value}-role-fact1value').with({
-        #'name' => 'name',
-        'path' => '/etc/puppetlabs/facter/facts.d/facts.yaml',
-        'line' => 'role: fact1value',
+        # 'name' => 'name',
+        'path'  => '/etc/puppetlabs/facter/facts.d/facts.yaml',
+        'line'  => 'role: fact1value',
         'match' => "^role:",
       })
     }
-  
+
   end
 
   context 'with fact and facts_dir specified and windows kernel' do
@@ -55,10 +55,10 @@ describe 'facter::classifier' do
       }
     end
 
-    it {  
+    it {
       should contain_file_line('fact_line_newgroup -  {value => fact1value}-role-fact1value').with({
-        'path' => 'C:\ProgramData\PuppetLabs\facter\facts.d/facts.yaml',
-        'line' => 'role: fact1value',
+        'path'  => 'C:\ProgramData\PuppetLabs\facter\facts.d/facts.yaml',
+        'line'  => 'role: fact1value',
         'match' => "^role:",
       })
     }
