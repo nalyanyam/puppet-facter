@@ -9,7 +9,7 @@ class facter (
   Boolean $purge_facts_d          = false,
   Boolean $facts_hash_hiera_merge = false,
 ) {
-  
+
   case $::kernel {
     'Linux': {
       $default_facts_d_dir = '/etc/puppetlabs/facter/facts.d'
