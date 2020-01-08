@@ -34,16 +34,16 @@ class facter (
 
 
   file { 'facts_d_directory':
-    path    => $facts_d_dir_real,
-    ensure  => 'directory',
-    purge   => $purge_facts_d,
+    path   => $facts_d_dir_real,
+    ensure => 'directory',
+    purge  => $purge_facts_d,
   }
   file { "facts_file_${name}":
     ensure => file,
     path   => "${facts_d_dir_real}/${facts_file}",
-    #owner  => $facter::facts_file_owner,
-    #group  => $facter::facts_file_group,
-    #mode   => $facter::facts_file_mode,
+    #owner => $facter::facts_file_owner,
+    #group => $facter::facts_file_group,
+    #mode  => $facter::facts_file_mode,
   }
 
 
@@ -78,8 +78,8 @@ class facter (
           #$key
           facter::classifier { "${uniq_key} -  ${newfacts_hash}":
             key => $key,
-            fact_value => $newfacts_hash['value'],
-            facts_file => $facts_file,
+            fact_value  => $newfacts_hash['value'],
+            facts_file  => $facts_file,
             facts_d_dir => $facts_d_dir_real,
             facts_hash  => $facts_hash,
             hostlist    => $value['hostlist'],
