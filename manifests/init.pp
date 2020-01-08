@@ -53,10 +53,10 @@ class facter (
   ## first $value is 'some uniq name' hash
     #$value['baz'] # first value is 12345
 
-   $facts_defaults = {
-      'file'      => $facts_file,
-      'facts_dir' => $facts_d_dir,
-    }
+  $facts_defaults = {
+    'file'      => $facts_file,
+    'facts_dir' => $facts_d_dir,
+  }
 
   # Merge facts_hash in hiera
   if $facts_hash_hiera_merge == true {
@@ -66,37 +66,37 @@ class facter (
   }
 
 
-   $hostlist_array = lookup(facter::classifier, {merge => "$hash_merge_strategy"}).map |String $key, Hash $value| {
-      $hostlist =  $value['hostlist']
-   }
-   $filtered_array = lookup(facter::classifier, {merge => "$hash_merge_strategy"}).map |String $uniq_key, Hash $value| {
-     case $hostname {
-       *$value['hostlist']: {
-         $value['facts_hash'].map |String $key, Hash $newfacts_hash| {
-           #flatten($newfacts_hash['value'])
-           #$newfacts_hash['value']
-           #$key
-           facter::classifier { "$uniq_key -  $newfacts_hash":
-             key => $key,
-             fact_value => $newfacts_hash['value'],
-             facts_file => $facts_file,
-             facts_d_dir => $facts_d_dir_real,
-             facts_hash  => $facts_hash,
-             hostlist    => $value['hostlist'],
-           }
+  $hostlist_array = lookup(facter::classifier, {merge => $hash_merge_strategy}).map |String $key, Hash $value| {
+    $hostlist =  $value['hostlist']
+  }
+  $filtered_array = lookup(facter::classifier, {merge => $hash_merge_strategy}).map |String $uniq_key, Hash $value| {
+    case $hostname {
+      *$value['hostlist']: {
+        $value['facts_hash'].map |String $key, Hash $newfacts_hash| {
+          #flatten($newfacts_hash['value'])
+          #$newfacts_hash['value']
+          #$key
+          facter::classifier { "${uniq_key} -  ${newfacts_hash}":
+            key => $key,
+            fact_value => $newfacts_hash['value'],
+            facts_file => $facts_file,
+            facts_d_dir => $facts_d_dir_real,
+            facts_hash  => $facts_hash,
+            hostlist    => $value['hostlist'],
+          }
 
-         }
-       }
-       default: {
-         #false
-       }
-     }
-     # End for case statement
-   }
-   # End for $filtered_array
+        }
+      }
+      default: {
+        #false
+      }
+    }
+    # End for case statement
+  }
+  # End for $filtered_array
 
-   # Only for debugging
-   #notify {"Filtered_array: $filtered_array": }
+  # Only for debugging
+  #notify {"Filtered_array: $filtered_array": }
 
 
 }
