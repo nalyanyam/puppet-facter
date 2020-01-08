@@ -34,8 +34,8 @@ class facter (
 
 
   file { 'facts_d_directory':
-    path   => $facts_d_dir_real,
     ensure => 'directory',
+    path   => $facts_d_dir_real,
     purge  => $purge_facts_d,
   }
   file { "facts_file_${name}":
@@ -70,14 +70,14 @@ class facter (
     $hostlist =  $value['hostlist']
   }
   $filtered_array = lookup(facter::classifier, {merge => $hash_merge_strategy}).map |String $uniq_key, Hash $value| {
-    case $hostname {
+    case $::hostname {
       *$value['hostlist']: {
         $value['facts_hash'].map |String $key, Hash $newfacts_hash| {
           #flatten($newfacts_hash['value'])
           #$newfacts_hash['value']
           #$key
           facter::classifier { "${uniq_key} -  ${newfacts_hash}":
-            key => $key,
+            key         => $key,
             fact_value  => $newfacts_hash['value'],
             facts_file  => $facts_file,
             facts_d_dir => $facts_d_dir_real,

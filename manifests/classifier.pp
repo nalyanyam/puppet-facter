@@ -3,13 +3,13 @@
 # Manage yaml based external facts.
 #
 define facter::classifier (
-  $hostlist    = "$facter::hostlist",
+  $hostlist    = $facter::hostlist,
   #$hostlist_array     = "$facter::hostlist_array",
-  $fact_value = "$facter::fact_value",
-  $key  = "$facter::key",
-  $facts_hash = "$facter::facts_hash",
-  $facts_file  = "$facter::facts_file",
-  $facts_d_dir = "$facter::facts_d_dir_real",
+  $fact_value  = $facter::fact_value,
+  $key         = $facter::key,
+  $facts_hash  = $facter::facts_hash,
+  $facts_file  = $facter::facts_file,
+  $facts_d_dir = $facter::facts_d_dir_real,
 
 ) {
 
@@ -36,9 +36,9 @@ define facter::classifier (
 
 
   if $host_fact == true {
-  file_line { "fact_line_${name}-${key}-$fact_value":
+  file_line { "fact_line_${name}-${key}-${fact_value}":
     path  => "${facts_d_dir}/${facts_file}",
-    line  => "${key}: $fact_value",
+    line  => "${key}: ${fact_value}",
     match => "^${key}:",
     #match => "$match",
   }
