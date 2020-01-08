@@ -61,3 +61,4 @@ This facter module borrowed heavily the concepts used in ghoneycutt/puppet-modul
 To be improved.
 
 # Added this line to check gitlab CI/CD pipeline
+#
