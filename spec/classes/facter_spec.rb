@@ -65,10 +65,8 @@ describe 'facter' do
 
     it {
       is_expected.to contain_file('facts_file_name').with(
-        {
-          'ensure'  => 'file',
-          'path'    => 'C:\ProgramData\PuppetLabs\facter\facts.d/facts.yaml',
-        }
+        'ensure'  => 'file',
+        'path'    => 'C:\ProgramData\PuppetLabs\facter\facts.d/facts.yaml',
       )
     }
 

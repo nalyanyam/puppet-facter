@@ -53,6 +53,7 @@ describe 'facter::classifier' do
         facts_d_dir: 'C:\ProgramData\PuppetLabs\facter\facts.d',
       }
     end
+
     it {
       is_expected.to contain_file_line('fact_line_newgroup -  {value => fact1value}-role-fact1value').with(
         'path'  => 'C:\ProgramData\PuppetLabs\facter\facts.d/facts.yaml',
