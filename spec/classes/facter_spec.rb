@@ -31,18 +31,22 @@ describe 'facter' do
     it { should contain_class('facter') }
 
     it {
-      should contain_file('facts_file_name').with({
-        'ensure'  => 'file',
-        'path'    => '/factsdir/customs.yaml',
-      })
+      should contain_file('facts_file_name').with(
+        {
+          'ensure'  => 'file',
+          'path'    => '/factsdir/customs.yaml',
+        }
+      )
     }
 
     it {
-      should contain_file('facts_d_directory').with({
-        'ensure'  => 'directory',
-        'path'    => '/factsdir',
-        'purge'   => false,
-      })
+      should contain_file('facts_d_directory').with(
+        {
+          'ensure'  => 'directory',
+          'path'    => '/factsdir',
+          'purge'   => false,
+        }
+      )
     }
   end
 
@@ -64,18 +68,22 @@ describe 'facter' do
     it { should contain_class('facter') }
 
     it {
-      should contain_file('facts_file_name').with({
-        'ensure'  => 'file',
-        'path'    => 'C:\ProgramData\PuppetLabs\facter\facts.d/facts.yaml',
-      })
+      should contain_file('facts_file_name').with(
+        {
+          'ensure'  => 'file',
+          'path'    => 'C:\ProgramData\PuppetLabs\facter\facts.d/facts.yaml',
+        }
+      )
     }
 
     it {
-      should contain_file('facts_d_directory').with({
-        'ensure'  => 'directory',
-        'path'    => 'C:\ProgramData\PuppetLabs\facter\facts.d',
-        'purge'   => false,
-      })
+      should contain_file('facts_d_directory').with(
+        {
+          'ensure'  => 'directory',
+          'path'    => 'C:\ProgramData\PuppetLabs\facter\facts.d',
+          'purge'   => false,
+        }
+      )
     }
   end
 end
