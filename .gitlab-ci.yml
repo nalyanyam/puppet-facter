@@ -8,12 +8,12 @@ cache:
     - vendor/bundle
 
 before_script:
-  - gem install bundle
   - bundle -v
   - rm Gemfile.lock || true
   - gem update --system $RUBYGEMS_VERSION
   - gem --version
   - bundle -v
+  - bundle update listen
   - bundle install --without system_tests --path vendor/bundle --jobs $(nproc)
 
 syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop-Ruby 2.5.3-Puppet ~> 6:
