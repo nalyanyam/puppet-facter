@@ -13,23 +13,22 @@ describe 'facter' do
   # context 'with default options' do
   context 'with kernel Linux options' do
     let(:facts) do
-      { 
-        :kernel => 'Linux',
-        :hostname => 'test1',
+      {
+        kernel:  'Linux',
+        hostname:  'test1',
       }
     end
 
     let(:params) do
-      { 
-        :name => 'name',
-        :purge_facts_d => false,
-        :facts_d_dir   => '/factsdir',
-        :facts_file    => 'customs.yaml',
+      {
+        name:  'name',
+        purge_facts_d:  false,
+        facts_d_dir:    '/factsdir',
+        facts_file:     'customs.yaml',
       }
     end
 
     it { should contain_class('facter') }
-
 
     it { should contain_file('facts_file_name').with({
         'ensure'  => 'file',
@@ -50,15 +49,15 @@ describe 'facter' do
   context 'with kernel windows options' do
     let(:facts) do
       {
-        :kernel => 'windows',
-        :hostname => 'test1',
+        kernel:  'windows',
+        hostname:  'test1',
       }
     end
 
     let(:params) do
-      { 
-        :name => 'name',
-        :purge_facts_d => false,
+      {
+        name:  'name',
+        purge_facts_d: false,
       }
     end
 

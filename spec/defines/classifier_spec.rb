@@ -22,18 +22,16 @@ describe 'facter::classifier' do
     end
   end
 
-
   context 'with fact and facts_dir specified and Linux kernel' do
     let(:facts) { { :kernel => 'Linux' } }
     let(:node) { 'test1.localdomain.com' }
     let(:node_params) do
       {
-        :facts_file => 'facts.yaml',
-        :facts_d_dir => '/etc/puppetlabs/facter/facts.d',
+        facts_file:  'facts.yaml',
+        facts_d_dir: '/etc/puppetlabs/facter/facts.d',
       }
     end
 
-    
     it {  
       should contain_file_line('fact_line_newgroup -  {value => fact1value}-role-fact1value').with({
         #'name' => 'name',
@@ -51,13 +49,12 @@ describe 'facter::classifier' do
     let(:facts_file) { 'custom.yaml' }
     let(:params) do
       {
-        :name   =>  'name',
-        'facts_file' => 'facts.yaml',
-        'facts_d_dir' => 'C:\ProgramData\PuppetLabs\facter\facts.d',
+        name:        'name',
+        facts_file:  'facts.yaml',
+        facts_d_dir: 'C:\ProgramData\PuppetLabs\facter\facts.d',
       }
     end
 
-    
     it {  
       should contain_file_line('fact_line_newgroup -  {value => fact1value}-role-fact1value').with({
         'path' => 'C:\ProgramData\PuppetLabs\facter\facts.d/facts.yaml',
