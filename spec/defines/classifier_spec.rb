@@ -33,13 +33,11 @@ describe 'facter::classifier' do
     end
 
     it {
-      should contain_file_line('fact_line_newgroup -  {value => fact1value}-role-fact1value').with(
-        {
-          # 'name' => 'name',
-          'path'  => '/etc/puppetlabs/facter/facts.d/facts.yaml',
-          'line'  => 'role: fact1value',
-          'match' => "^role:",
-        }
+      is_expected.to contain_file_line('fact_line_newgroup -  {value => fact1value}-role-fact1value').with(
+        # 'name' => 'name',
+        'path'  => '/etc/puppetlabs/facter/facts.d/facts.yaml',
+        'line'  => 'role: fact1value',
+        'match' => '^role:',
       )
     }
   end
@@ -55,16 +53,12 @@ describe 'facter::classifier' do
         facts_d_dir: 'C:\ProgramData\PuppetLabs\facter\facts.d',
       }
     end
-
     it {
-      should contain_file_line('fact_line_newgroup -  {value => fact1value}-role-fact1value').with(
-        {
-          'path'  => 'C:\ProgramData\PuppetLabs\facter\facts.d/facts.yaml',
-          'line'  => 'role: fact1value',
-          'match' => '^role:',
-        }
+      is_expected.to contain_file_line('fact_line_newgroup -  {value => fact1value}-role-fact1value').with(
+        'path'  => 'C:\ProgramData\PuppetLabs\facter\facts.d/facts.yaml',
+        'line'  => 'role: fact1value',
+        'match' => '^role:',
       )
     }
   end
-
 end
