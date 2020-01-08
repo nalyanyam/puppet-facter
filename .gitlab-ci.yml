@@ -8,6 +8,7 @@ cache:
     - vendor/bundle
 
 before_script:
+  - gem install bundle
   - bundle -v
   - rm Gemfile.lock || true
   - gem update --system $RUBYGEMS_VERSION
