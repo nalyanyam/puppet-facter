@@ -13,10 +13,10 @@ define facter::classifier (
 
 ) {
 
-  include ::facter 
+  include ::facter
 
 
-  
+
 
   #$match = "^${key}:"
   ##########################
@@ -27,8 +27,8 @@ define facter::classifier (
   case $trusted['hostname'] {
     # using splat function
     *$hostlist: {
-                   $host_fact = true
-    }
+                  $host_fact = true
+                }
     default:  {
                 $host_fact = false
               }
