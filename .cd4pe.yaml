@@ -1,0 +1,27 @@
+spec_version: v1
+config:
+  enable_pull_requests_from_forks: false
+  deployment_policy_branch: production
+pipelines:
+  master:
+    triggers:
+      - pull_request
+      - commit
+    stages:
+      - name: "Lint/Parser validation"
+        auto_promote: all_succeeded
+        steps:
+          - type: job
+            name: control-repo-puppetfile-syntax-validate
+          - type: job
+            name: control-repo-template-syntax-validate
+          - type: job
+            name: control-repo-validate-hiera-syntax
+          - type: job
+            name: control-repo-validate-manifest
+      - name: "Impact Analysis"
+        auto_promote: any_succeeded
+        steps:
+          - type: impact_analysis
+            concurrent_compilations: 10
+          - type: pull_request_gate
